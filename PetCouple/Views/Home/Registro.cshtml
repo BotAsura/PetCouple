@@ -51,6 +51,7 @@
                     asp-controller="Home"                                        
                     method="post"  
                     class="row"
+                    enctype="multipart/form-data"
                   >                  
                   <div class="col-lg-4">
                       <label
@@ -75,7 +76,7 @@
                       >
                       <input
                         type="text"
-                        name="Usuario"
+                        name="Usuario1"
                         id="lblUser"
                         class="form-control form-control-lg"
                         placeholder="Coloca tú usuario aquí"
@@ -212,8 +213,11 @@
                       <input 
                       class="form-control mt-1" 
                       type="file" 
-                      name="uploud"
-                      id="lblFoto">
+                      name="image"
+                      id="lblFoto"
+                      accept="image/*"
+                      >
+                      
                     </div>
                     <div class="text-center col-lg-12">
                       <div class="mb-4 mt-4">

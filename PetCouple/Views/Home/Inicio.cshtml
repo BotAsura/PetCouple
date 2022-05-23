@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="container">
+    <div class="row mt-3">
+        <img src="~/img/Prueba.jpg" width="350rem" height="auto" alt="Prueba" />
+        <div class="buttons mt-3">
+            <button onclick="aceptar(1)" class=""><i class="fa-solid fa-circle-check icon text-success "></i></button>
+            <button onclick="rechazar(2)" class=""><i class="fa-solid fa-circle-xmark icon text-danger"></i></button>
+        </div>
+    </div>
+</div>
+
+<div>
+    <form asp-action="Aceptar" asp-controller="Home" method="post" id="frmAceptar">
+        <input type="hidden" id="id_Mascota_A" name="aceptar"/>
+    </form>
+    <form asp-action="Rechazar" asp-controller="Home" method="post" id="frmRechazar">
+        <input type="hidden" id="id_Mascota_C" name="rechazar" />
+    </form>
+</div>
+
+<script>
+function aceptar(id){
+    document.getElementById("id_Mascota_A").value = id;    
+    frmAceptar.submit();
+    
+};
+function rechazar(id){
+    document.getElementById("id_Mascota_C").value = id;    
+    frmRechazar.submit();
+}
+</script>

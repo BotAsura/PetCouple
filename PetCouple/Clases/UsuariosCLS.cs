@@ -1,58 +1,57 @@
 ﻿using PetCouple.Models;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace PetCouple.Clases
 {
     public class UsuariosCLS
     {
-        public string Ingresar(Usuarios user) {
-            using (PetCoupleContext db = new PetCoupleContext()) {
-                int nveces = db.Usuarios.Where(x => x.Usuario == user.Usuario && x.Contraseña == user.Contraseña).Count();
+        public string Ingresar(Usuario user)
+        {
+            using (PetCoupleContext db = new PetCoupleContext())
+            {
+                int nveces = db.Usuario.Where(x => x.Usuario1 == user.Usuario1 && x.Contraseña == user.Contraseña).Count();
                 if (nveces != 0)
                 {
                     return "Todo Ok";
-                }                
+                }
             }
             return "Nada Ok";
         }
-        public string Reg(Usuarios user, Mascotas pet, UsuariosNormales userNorm) {
-            using (PetCoupleContext db = new PetCoupleContext())
-            {
-                Usuarios setUser = new Usuarios();
+        public string Reg(Usuario user,byte[] image)
+        {
+            using (PetCoupleContext db = new PetCoupleContext()) {
 
-                setUser.Usuario = user.Usuario;
-                setUser.Contraseña = user.Contraseña;
-                setUser.Correo = user.Correo;
-                setUser.Visibilidad = user.Visibilidad;
+                Usuario setUsuario = new Usuario();
 
-                db.Usuarios.Add(setUser);
-                
-                Mascotas setPet = new Mascotas();
+                setUsuario.Usuario1 = user.Usuario1;
+                setUsuario.Contraseña = user.Contraseña;
+                setUsuario.Correo = user.Correo;
+                setUsuario.Delegacion = user.Delegacion;
+                setUsuario.NombreMascota = user.NombreMascota;
+                setUsuario.EdadMascota = user.EdadMascota;
+                setUsuario.Sexo =  user.Sexo;
+                setUsuario.Foto = image;
+                setUsuario.Raza = user.Raza;
+                setUsuario.NombreCompleto = user.NombreCompleto;
+                setUsuario.NumeroTel = user.NumeroTel;
 
-                setPet.NombreMascota = pet.NombreMascota;
-                setPet.EdadMascota = pet.EdadMascota;
-                setPet.Sexo = pet.Sexo;
-                setPet.Foto = pet.Foto;
-                setPet.Raza = pet.Raza;
+                try
+                {
+                    db.Usuario.Add(setUsuario);
 
-                db.Mascotas.Add(setPet);
+                    db.SaveChanges();
 
-                UsuariosNormales setUsuarioNormal = new UsuariosNormales();
+                    return "Todo bien";
+                }
+                catch (System.Exception ex)
+                {
 
-                setUsuarioNormal.NombreCompleto = userNorm.NombreCompleto;
-                setUsuarioNormal.NumeroTel = userNorm.NumeroTel;
-                setUsuarioNormal.IdDelegacion = 1;
-                setUsuarioNormal.IdMascota = 1;
-                setUsuarioNormal.IdInteraccion = null;
-                setUsuarioNormal.IdUsuario = 1;
-
-                db.UsuariosNormales.Add(userNorm);
-
-                db.SaveChanges();
-
-                return "Todo bien";
+                    return "Todo Mal + " + ex.Message;
+                }
             }
         }
     }
 }
+
