@@ -1,0 +1,242 @@
+﻿@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">    
+  </head>
+  <body>
+    <style>
+      body {
+        background-image: url(/img/Fondo.jpg);
+        background-size: cover;
+        backdrop-filter: blur(2px);
+      }
+      .container {
+        opacity: 0.9;
+      }
+    </style>
+    <main>
+      <section class="vh-100">
+        <div class="container py-4 h-100">
+          <div
+            class="row h-100"
+          >
+            <div class="col-12">
+              <div class="card shadow-2-strong" style="border-radius: 1rem">
+                <div class="card-body p-5">
+                  <div class="text-center">
+                    <img
+                      src="~/img/registro.png"
+                      alt="Imagen Principal"
+                      class="mb-2"
+                      width="125px"
+                      height="auto"
+                    />
+                  </div>
+                  @if(@ViewBag.Bool){
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">        
+                          <i class="bi bi-exclamation-triangle-fill"></i>
+                            @ViewBag.Mensaje
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                   }
+                  <form
+                    asp-action="Registro"
+                    asp-controller="Home"                                        
+                    method="post"  
+                    class="row"
+                  >                  
+                  <div class="col-lg-4">
+                      <label
+                        for="lblCorreo"
+                        class="col-form-label col-form-label-lg"
+                        >Correo:</label
+                      >
+                      <input
+                        type="text"
+                        name="Correo"
+                        id="lblCorreo"
+                        class="form-control form-control-lg"
+                        placeholder="Coloca tú Correo aquí"
+                        required
+                      />
+                    </div>                    
+                    <div class="col-lg-4">
+                      <label
+                        for="lblUser"
+                        class="col-form-label col-form-label-lg"
+                        >Usuario:</label
+                      >
+                      <input
+                        type="text"
+                        name="Usuario"
+                        id="lblUser"
+                        class="form-control form-control-lg"
+                        placeholder="Coloca tú usuario aquí"
+                        required
+                      />
+                    </div>                    
+                    <div class="col-lg-4">
+                      <label
+                        for="lblPass"
+                        class="col-form-label col-form-label-lg"
+                        >Contraseña:</label
+                      >
+                      <input
+                        type="password"
+                        name="Contraseña"
+                        id="lblPass"
+                        placeholder="Coloca tú contraseña aquí"
+                        class="form-control form-control-lg"
+                        required
+                      />
+                    </div>                    
+                    <div class="col-lg-4">
+                      <label
+                        for="lblDelegacion"
+                        class="col-form-label col-form-label-lg"
+                        >Delegacion:</label
+                      >                   
+                      <input class="form-control form-control-lg" 
+                      list="datalistDelegacion" 
+                      id="lblDelegacion" 
+                      name="Delegacion" 
+                      placeholder="Busca tú delegación">
+                      <datalist id="datalistDelegacion">
+                        <option value="San Francisco"/>
+                        <option value="New York"/>
+                        <option value="Seattle"/>
+                        <option value="Los Angeles"/>
+                        <option value="Chicago"/>
+                      </datalist>
+                    </div>                          
+                    <div class="col-lg-4">
+                      <label
+                        for="lblNombreMascota"
+                        class="col-form-label col-form-label-lg"
+                        >Nombre Mascota:</label
+                      >
+                      <input
+                        type="text"
+                        name="NombreMascota"
+                        id="lblNombreMascota"
+                        placeholder="Coloca su nombre aquí"
+                        class="form-control form-control-lg"
+                        required
+                      />
+                    </div>
+                    <div class="col-lg-4">
+                      <label
+                        for="lblEdadMascota"
+                        class="col-form-label col-form-label-lg"
+                        >Edad Mascota:</label
+                      >
+                      <input
+                        type="text"
+                        name="EdadMascota"
+                        id="lblEdadMascota"
+                        placeholder="Coloca su edad aquí"
+                        class="form-control form-control-lg"
+                        required
+                      />
+                    </div>
+                    
+                    <div class="col-lg-4">
+                      <label
+                        for="lblRaza"
+                        class="col-form-label col-form-label-lg"
+                        >Nombre su Raza:</label
+                      >
+                      <input
+                        type="text"
+                        name="Raza"
+                        id="lblRaza"
+                        placeholder="Coloca su Raza"
+                        class="form-control form-control-lg"
+                        required
+                      />
+                    </div>
+                    <div class="col-lg-4">
+                      <label
+                        for="lblNombreCompleto"
+                        class="col-form-label col-form-label-lg"
+                        >Nombre Completo:</label
+                      >
+                      <input
+                        type="text"
+                        name="NombreCompleto"
+                        id="lblNombreCompleto"
+                        placeholder="Coloca su Nombre completo"
+                        class="form-control form-control-lg"
+                        required
+                      />
+                    </div>
+                    <div class="col-lg-4">
+                      <label
+                        for="lblNumeroTel"
+                        class="col-form-label col-form-label-lg"
+                        >Número de celular:</label
+                      >
+                      <input
+                        type="text"
+                        name="NumeroTel"
+                        id="lblNumeroTel"
+                        placeholder="Coloca su Celular aquí"
+                        class="form-control form-control-lg"
+                        required
+                      />
+                    </div>
+                    <div class="col-lg-6">    
+                      <label
+                        for="lblSexo"
+                        class="col-form-label col-form-label-lg"
+                        >Sexo de la mascota:</label
+                      >
+                      <select name="Sexo" id="lblSexo" class="form-select form-control form-control-lg" aria-label="Sexo de la mascota">
+                        <option selected disabled>Selecciona el genero</option>
+                        <option value="Hembra">Hembra</option>
+                        <option value="Macho">Macho</option>                        
+                      </select>
+                    </div>
+                    <div class="col-lg-6">                      
+                      <label 
+                      for="lblFoto" 
+                      class="col-form-label col-form-label-lg">
+                          Foto de la Mascota:</label>
+                      <input 
+                      class="form-control mt-1" 
+                      type="file" 
+                      name="uploud"
+                      id="lblFoto">
+                    </div>
+                    <div class="text-center col-lg-12">
+                      <div class="mb-4 mt-4">
+                        <a asp-action="Login" asp-controller="Home"
+                          >Click Aquí para Iniciar Sesion</a>
+                      </div>
+                      <button
+                        class="btn btn-primary btn-lg btn-block"
+                        type="submit"                        
+                      >
+                        Registrar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+  </body>
+</html>
