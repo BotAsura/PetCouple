@@ -5,24 +5,26 @@
 
 <h1>Likes</h1>
 
+
+@foreach(var item in Model){
 <div class="contenedor">
     <div class="centrar">
         <div class="card mb-3" style="max-width: 700px;">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="~/img/Prueba.jpg" class="img-fluid rounded-start" alt="..." id="card">
+              <img src="@Url.Action("GetImageLike",new { id = @item.IdUsuario})" class="img-fluid rounded-start" alt="..." id="card">
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">Nombre Mascota</h5>
-                <p class="card-text">Edad: </p>        
-                <p class="card-text">Raza: </p>        
-                <p class="card-text">Sexo: </p>              
-                <p class="card-text">Dueño: </p>
-                <p class="card-text">Delegacion: </p>
+                <h5 class="card-title">@item.NombreMascota</h5>
+                <p class="card-text">Edad: @item.EdadMascota</p>        
+                <p class="card-text">Raza: @item.Raza</p>        
+                <p class="card-text">Sexo: @item.Sexo</p>              
+                <p class="card-text">Dueño: @item.NombreCompleto</p>
+                <p class="card-text">Delegacion: @item.Delegacion</p>
                 <div class="buttons-match">
-                    <input class="btn btn-primary" type="submit" value="Match" />
-                    <input class="btn btn-danger" type="submit" value="Eliminar" />
+                    <input onclick="acept(@item.IdUsuario)" class="btn btn-primary" type="submit" value="Match" />
+                    <input onclick="negar(@item.IdUsuario)" class="btn btn-danger" type="submit" value="Eliminar" />
                 </div>
               </div>
             </div>
@@ -30,3 +32,21 @@
         </div>
     </div>
 </div>
+}
+<form asp-action="AcceptMatch" asp-controller="Home" method="post" id="frmAceptar">
+    
+</form>
+<form asp-action="DeniedMatch" asp-controller="Home" method="post" id="frmNegar">
+    <input type="hidden" value="" name="IdDenegar" id="denegar" />
+</form>
+
+<script>
+    function acept(id){
+        
+        frmAceptar.submit();
+    }
+    function negar(id){
+        document.getElementById("denegar").value = id;        
+        frmNegar.submit();
+    }
+</script>

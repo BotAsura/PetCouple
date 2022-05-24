@@ -18,13 +18,13 @@ namespace PetCouple.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IWebHostEnvironment hostEnvironment;        
+        private readonly IWebHostEnvironment hostEnvironment;
 
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment)
         {
             _logger = logger;
             this.hostEnvironment = hostEnvironment;
-        }        
+        }
         [HttpGet]
         public IActionResult Login()
         {
@@ -48,19 +48,19 @@ namespace PetCouple.Controllers
         [HttpPost]
         public IActionResult Registro(Usuarios user, IFormFile image)
         {
-            string wwwRootPath = hostEnvironment.WebRootPath;            
+            string wwwRootPath = hostEnvironment.WebRootPath;
             string extension = Path.GetExtension(image.FileName);
             string fileName = DateTime.Now.ToString("yymmssfff");
             string path = Path.Combine(wwwRootPath + "/img/", fileName + extension);
 
             using (var fileStream = new FileStream(path, FileMode.Create)) {
-                image.CopyTo(fileStream);                
-            }            
-            
-            ViewBag.Mensaje = new UsuariosCLS().Reg(user,Imagen_A_Bytes(path),fileName,path);            
-            
+                image.CopyTo(fileStream);
+            }
+
+            ViewBag.Mensaje = new UsuariosCLS().Reg(user, Imagen_A_Bytes(path), fileName, path);
+
             ViewBag.Bool = true;
-            
+
             return RedirectToAction("Login");
         }
         public Byte[] Imagen_A_Bytes(String ruta)
@@ -77,8 +77,8 @@ namespace PetCouple.Controllers
 
         }
         public IActionResult GetImage() {
-            byte[] imagen = new UsuariosCLS().getImage();            
-            return File(imagen, "image/*");                    
+            byte[] imagen = new UsuariosCLS().getImage();
+            return File(imagen, "image/*");
         }
         public IActionResult SinAnimales() {
             return View();
@@ -100,13 +100,29 @@ namespace PetCouple.Controllers
 
         public IActionResult Likes()
         {
-            return View();
+            return View(new UsuariosCLS().ListUsuarioLikes());
+        }
+
+        public IActionResult GetImageLike(int id) {
+
+            return File(new UsuariosCLS().getImageLike(id), "image/*");
+        }
+        [HttpPost]
+        public IActionResult AcceptMatch()
+        {
+            return RedirectToAction("Likes");
+        }
+        [HttpPost]
+        public IActionResult DeniedMatch(int IdDenegar)
+        {
+            new UsuariosCLS().negarMatch(IdDenegar);
+            return RedirectToAction("Likes");
         }
 
         public IActionResult Match() {
             return View();
         }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

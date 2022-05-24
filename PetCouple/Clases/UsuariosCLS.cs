@@ -116,7 +116,43 @@ namespace PetCouple.Clases
                 db.SaveChanges();
             }
 
-        }        
+        }
+        public List<Usuarios> ListUsuarioLikes() {
+            using (PetCoupleContext db = new PetCoupleContext()) {
+                List<Usuarios> ListUser = new List<Usuarios>();
+                var getLikes = db.Likes.Where(x => x.Usuario2 == Usuario).ToList();
+                for (int i = 0; i < getLikes.Count; i++)
+                {
+                    if (getLikes[i].Visibilidad)
+                    {
+                        ListUser.Add(db.Usuarios.Where(
+                                            x => x.IdUsuario == getLikes[i].Usuario1
+                                            ).First()); 
+                    }
+                }
+                return ListUser;
+            }
+        }
+        public byte[] getImageLike(int id)
+        {
+            using (PetCoupleContext db = new PetCoupleContext())
+            {
+                var getUsuario = db.Usuarios.Where(x => x.IdUsuario == id).First();
+                return getUsuario.Foto;
+            }
+        }
+        public void aceptarMatc() { 
+        }
+        public void negarMatch(int id) {
+            using (PetCoupleContext db = new PetCoupleContext()) {
+                var getLike = db.Likes.Where(x => x.Usuario1 == id && x.Usuario2 == Usuario ).FirstOrDefault();
+                if (getLike != null)
+                {
+                    getLike.Visibilidad = false;
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }
 
