@@ -1,3 +1,5 @@
+
+
 CREATE DATABASE PetCouple
 GO
 
@@ -7,7 +9,7 @@ GO
 CREATE TABLE Usuarios(
 Id_Usuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 Usuario NVARCHAR (20) NOT NULL,
-Contraseña NVARCHAR (20) NOT NULL,
+ContraseÃ±a NVARCHAR (20) NOT NULL,
 Correo NVARCHAR (30)  NOT NULL,
 Delegacion NVARCHAR(30) NOT NULL,
 NombreMascota  NVARCHAR (20) NOT NULL,
@@ -58,3 +60,18 @@ SELECT * FROM Usuarios
 SELECT * FROM Interaccion
 
 SELECT * FROM [Likes]
+
+SELECT * FROM Parques
+
+INSERT INTO Likes VALUES (2,1,'Si',1)
+INSERT INTO Likes VALUES (3,1,'Si',1)
+INSERT INTO Likes VALUES (4,1,'Si',1)
+INSERT INTO Likes VALUES (2,3,'Si',1)
+INSERT INTO Likes VALUES (2,4,'Si',1)
+
+INSERT INTO Parques VALUES('Parque Recreativo Santa Cruz Meyehualco','https://goo.gl/maps/uXnW5LjZ73HskZfX7')
+
+--UPDATE Likes 
+--SET Visibilidad = 1
+--WHERE Visibilidad = 0
+
