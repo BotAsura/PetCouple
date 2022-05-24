@@ -73,10 +73,10 @@ namespace PetCouple.Clases
                     var getLike = db.Likes.Where(x => x.Usuario2 == getUsuario.IdUsuario).FirstOrDefault();
                     if (getLike != null)
                     {
-                        if (!(getLike.Like == "Si" || getLike.Like == "No"))
-                        {
+                        if (!((getLike.Like == "Si" || getLike.Like == "No")))
+                        { 
                             UserScreen = getUsuario.IdUsuario;
-                            return getUsuario.Foto;
+                            return getUsuario.Foto;                             
                         }
                     }
                     else

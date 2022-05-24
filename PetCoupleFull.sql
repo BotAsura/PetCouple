@@ -1,0 +1,60 @@
+CREATE DATABASE PetCouple
+GO
+
+USE PetCouple				   
+GO
+
+CREATE TABLE Usuarios(
+Id_Usuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+Usuario NVARCHAR (20) NOT NULL,
+Contraseña NVARCHAR (20) NOT NULL,
+Correo NVARCHAR (30)  NOT NULL,
+Delegacion NVARCHAR(30) NOT NULL,
+NombreMascota  NVARCHAR (20) NOT NULL,
+EdadMascota NVARCHAR (10) NOT NULL,
+Sexo NVARCHAR (10) NOT NULL,
+Foto VARBINARY(MAX) NULL,
+Raza NVARCHAR(30) NOT NULL,
+NombreCompleto NVARCHAR (70) NOT NULL,
+NumeroTel NVARCHAR (10) NOT NULL,
+Identficador NVARCHAR(MAX) NOT NULL
+);
+GO
+
+CREATE TABLE Likes(
+Id_Likes INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+Usuario1 INT NULL,
+Usuario2 INT NULL,
+[LIKE] NVARCHAR(2) NULL,
+Visibilidad Bit NOT NULL
+
+CONSTRAINT fk_Like_User1 FOREIGN KEY (Usuario1) REFERENCES Usuarios(Id_Usuario),
+CONSTRAINT fk_Like_User2 FOREIGN KEY (Usuario2) REFERENCES Usuarios(Id_Usuario),
+);
+GO
+
+CREATE TABLE Parques(
+Id_Parque INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+Lugar NVARCHAR(50) NOT NULL,
+[Url] NVARCHAR(MAX) NOT NULL
+);
+GO
+
+CREATE TABLE Interaccion(
+Id_Interaccion INT NOT NULL PRIMARY KEY IDENTITY(1,1) ,
+Usuario1 INT NULL,
+Usuario2 INT NULL,
+[Match] BIT NULL,
+Id_Parque INT NOT NULL,
+
+CONSTRAINT fk_1User FOREIGN KEY (Usuario1) REFERENCES Usuarios(Id_Usuario),
+CONSTRAINT fk_2User FOREIGN KEY (Usuario2) REFERENCES Usuarios(Id_Usuario),
+CONSTRAINT fk_Parque FOREIGN KEY (Id_Parque) REFERENCES Parques(Id_Parque)
+);
+GO
+
+SELECT * FROM Usuarios
+
+SELECT * FROM Interaccion
+
+SELECT * FROM [Likes]

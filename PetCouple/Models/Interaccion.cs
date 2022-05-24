@@ -13,7 +13,9 @@ namespace PetCouple.Models
         public int? Usuario1 { get; set; }
         public int? Usuario2 { get; set; }
         public bool? Match { get; set; }
+        public int IdParque { get; set; }
 
+        public virtual Parques IdParqueNavigation { get; set; }
         public virtual Usuarios Usuario1Navigation { get; set; }
         public virtual Usuarios Usuario2Navigation { get; set; }
     }

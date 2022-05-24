@@ -98,6 +98,15 @@ namespace PetCouple.Controllers
             return RedirectToAction("Inicio");
         }
 
+        public IActionResult Likes()
+        {
+            return View();
+        }
+
+        public IActionResult Match() {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

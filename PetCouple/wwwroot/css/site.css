@@ -1,5 +1,77 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+.contenedor {
+    display: flex;    
+    justify-content: center;
+}
+@keyframes animacion {
+    0% {
+        -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+        -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+        box-shadow: 00px 0px 0px 0px rgba(0,0,0,0);
+    }
+
+    100% {
+        -webkit-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.5);
+        -moz-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.5);
+        box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.5);
+    }
+}
+.card:hover {
+    animation: animacion 0.5s forwards;
+}
+.card {
+    
+    border-radius: 0% 2rem 0% 2rem ;
+}
+#card {
+    border-radius: 0% 0rem 0% 2rem;
+}
+.buttons-match {
+    margin-top: 1rem;
+    margin-bottom:0rem;    
+}
+p.card-text {
+   
+}
+h1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+.start {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    width: 350px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.buttons > button {
+    border: none;
+    background-color: white;
+    outline: none;
+}
+
+.icon {
+    font-size: 64px;
+    border-radius: 100%;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+#imagen {
+    border-radius: 20px;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
 
 a.navbar-brand {
   white-space: normal;

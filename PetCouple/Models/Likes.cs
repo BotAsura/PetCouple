@@ -13,6 +13,7 @@ namespace PetCouple.Models
         public int? Usuario1 { get; set; }
         public int? Usuario2 { get; set; }
         public string Like { get; set; }
+        public bool Visibilidad { get; set; }
 
         public virtual Usuarios Usuario1Navigation { get; set; }
         public virtual Usuarios Usuario2Navigation { get; set; }

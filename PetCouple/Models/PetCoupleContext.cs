@@ -21,12 +21,14 @@ namespace PetCouple.Models
 
         public virtual DbSet<Interaccion> Interaccion { get; set; }
         public virtual DbSet<Likes> Likes { get; set; }
+        public virtual DbSet<Parques> Parques { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=Asura;Initial Catalog=PetCouple;Integrated Security=True");
             }
         }
@@ -36,9 +38,17 @@ namespace PetCouple.Models
             modelBuilder.Entity<Interaccion>(entity =>
             {
                 entity.HasKey(e => e.IdInteraccion)
-                    .HasName("PK__Interacc__18BDD9FCE67D7F5C");
+                    .HasName("PK__Interacc__18BDD9FC596C6C42");
 
                 entity.Property(e => e.IdInteraccion).HasColumnName("Id_Interaccion");
+
+                entity.Property(e => e.IdParque).HasColumnName("Id_Parque");
+
+                entity.HasOne(d => d.IdParqueNavigation)
+                    .WithMany(p => p.Interaccion)
+                    .HasForeignKey(d => d.IdParque)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Parque");
 
                 entity.HasOne(d => d.Usuario1Navigation)
                     .WithMany(p => p.InteraccionUsuario1Navigation)
@@ -54,7 +64,7 @@ namespace PetCouple.Models
             modelBuilder.Entity<Likes>(entity =>
             {
                 entity.HasKey(e => e.IdLikes)
-                    .HasName("PK__Likes__F8B738477544D58E");
+                    .HasName("PK__Likes__F8B738475EAD98FD");
 
                 entity.Property(e => e.IdLikes).HasColumnName("Id_Likes");
 
@@ -73,10 +83,24 @@ namespace PetCouple.Models
                     .HasConstraintName("fk_Like_User2");
             });
 
+            modelBuilder.Entity<Parques>(entity =>
+            {
+                entity.HasKey(e => e.IdParque)
+                    .HasName("PK__Parques__43EDB85E3BAFD27C");
+
+                entity.Property(e => e.IdParque).HasColumnName("Id_Parque");
+
+                entity.Property(e => e.Lugar)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Url).IsRequired();
+            });
+
             modelBuilder.Entity<Usuarios>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuarios__63C76BE2DEF03AF6");
+                    .HasName("PK__Usuarios__63C76BE274D13281");
 
                 entity.Property(e => e.IdUsuario).HasColumnName("Id_Usuario");
 
