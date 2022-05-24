@@ -4,11 +4,11 @@
 }
 
 <div class="container">
-    <div class="row mt-3">
-        <img src="~/img/Prueba.jpg" width="350rem" height="auto" alt="Prueba" />
+    <div class="row mt-3">        
+        <img src="@Url.Action("GetImage")" style="width:25rem" alt="" id="imagen"/>
         <div class="buttons mt-3">
-            <button onclick="aceptar(1)" class=""><i class="fa-solid fa-circle-check icon text-success "></i></button>
-            <button onclick="rechazar(2)" class=""><i class="fa-solid fa-circle-xmark icon text-danger"></i></button>
+            <button onclick="aceptar()" class=""><i class="fa-solid fa-circle-check icon text-success "></i></button>
+            <button onclick="rechazar()" class=""><i class="fa-solid fa-circle-xmark icon text-danger"></i></button>
         </div>
     </div>
 </div>
@@ -20,16 +20,29 @@
     <form asp-action="Rechazar" asp-controller="Home" method="post" id="frmRechazar">
         <input type="hidden" id="id_Mascota_C" name="rechazar" />
     </form>
+    <form asp-action="SinAnimales" asp-Controller="Home" id="frmError">  
+
+    </form>
 </div>
 
 <script>
-function aceptar(id){
-    document.getElementById("id_Mascota_A").value = id;    
+function aceptar(){
+    var src = document.getElementById("imagen").src;
+    var path = src.substring(src.lastIndexOf("/") + 1, src.lastIndexOf("."));
+    document.getElementById("id_Mascota_A").value = path;    
+    console.log(path);
     frmAceptar.submit();
     
 };
 function rechazar(id){
     document.getElementById("id_Mascota_C").value = id;    
     frmRechazar.submit();
+}
+
+window.onload = function () {
+    var ancho = document.getElementById("imagen").height;    
+    if(ancho == 0){
+        frmError.submit();
+    }  
 }
 </script>

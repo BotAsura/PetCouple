@@ -7,16 +7,18 @@ using System.Collections.Generic;
 
 namespace PetCouple.Models
 {
-    public partial class Usuario
+    public partial class Usuarios
     {
-        public Usuario()
+        public Usuarios()
         {
             InteraccionUsuario1Navigation = new HashSet<Interaccion>();
             InteraccionUsuario2Navigation = new HashSet<Interaccion>();
+            LikesUsuario1Navigation = new HashSet<Likes>();
+            LikesUsuario2Navigation = new HashSet<Likes>();
         }
 
         public int IdUsuario { get; set; }
-        public string Usuario1 { get; set; }
+        public string Usuario { get; set; }
         public string Contraseña { get; set; }
         public string Correo { get; set; }
         public string Delegacion { get; set; }
@@ -27,8 +29,11 @@ namespace PetCouple.Models
         public string Raza { get; set; }
         public string NombreCompleto { get; set; }
         public string NumeroTel { get; set; }
+        public string Identficador { get; set; }
 
         public virtual ICollection<Interaccion> InteraccionUsuario1Navigation { get; set; }
         public virtual ICollection<Interaccion> InteraccionUsuario2Navigation { get; set; }
+        public virtual ICollection<Likes> LikesUsuario1Navigation { get; set; }
+        public virtual ICollection<Likes> LikesUsuario2Navigation { get; set; }
     }
 }

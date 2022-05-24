@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace PetCouple.Models
 {
-    public partial class Interaccion
+    public partial class Likes
     {
-        public int IdInteraccion { get; set; }
+        public int IdLikes { get; set; }
         public int? Usuario1 { get; set; }
         public int? Usuario2 { get; set; }
-        public bool? Match { get; set; }
+        public string Like { get; set; }
 
         public virtual Usuarios Usuario1Navigation { get; set; }
         public virtual Usuarios Usuario2Navigation { get; set; }

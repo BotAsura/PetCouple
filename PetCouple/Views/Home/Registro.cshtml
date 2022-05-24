@@ -76,7 +76,7 @@
                       >
                       <input
                         type="text"
-                        name="Usuario1"
+                        name="Usuario"
                         id="lblUser"
                         class="form-control form-control-lg"
                         placeholder="Coloca tú usuario aquí"
@@ -110,11 +110,22 @@
                       name="Delegacion" 
                       placeholder="Busca tú delegación">
                       <datalist id="datalistDelegacion">
-                        <option value="San Francisco"/>
-                        <option value="New York"/>
-                        <option value="Seattle"/>
-                        <option value="Los Angeles"/>
-                        <option value="Chicago"/>
+                        <option value="Álvaro Obregón"/>
+                        <option value="Azcapotzalco"/>
+                        <option value="Benito Juárez"/>
+                        <option value="Coyoacán"/>
+                        <option value="Cuajimalpa de Morelos"/>
+                        <option value="Cuactécmoc"/>
+                        <option value="Gustavo A. Madero"/>
+                        <option value="Iztacalco"/>
+                        <option value="Iztapalapa"/>
+                        <option value="Magdalena Contreras"/>
+                        <option value="Miguel Hidalgo"/>
+                        <option value="Milpa Alta"/>
+                        <option value="Tláhuac"/>
+                        <option value="Tlalpan"/>
+                        <option value="Venustiano Carranza"/>
+                        <option value="Xochimilco"/>
                       </datalist>
                     </div>                          
                     <div class="col-lg-4">
@@ -154,14 +165,60 @@
                         class="col-form-label col-form-label-lg"
                         >Nombre su Raza:</label
                       >
-                      <input
-                        type="text"
-                        name="Raza"
-                        id="lblRaza"
-                        placeholder="Coloca su Raza"
-                        class="form-control form-control-lg"
-                        required
-                      />
+                      <select class="form-control form-control-lg form-select" 
+                      list="datalistRazaPerro" 
+                      id="lblRazaPerro" 
+                      name="Raza" 
+                      placeholder="Busca la raza de tu Perro">   
+                       <option value="" disabled selected>-----ESCOGE LA RAZA-----</option>
+                        <option value="" disabled>-----RAZA DE GATOS-----</option>
+                        <option value="Labrador">Labrador</option>
+                        <option value="Pug">Pug</option>
+                        <option value="Schnauzer">Schunauzer</option>
+                        <option value="Husky Siberiano">Husky Siberiano</option>
+                        <option value="Pastor Alemán">Pastor Alemán</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="PitBull">PitBull</option>
+                        <option value="Beagle">Beagle</option>
+                        <option value="Boxer">Boxer</option>
+                        <option value="San Bernardo">San Bernardo</option>
+                        <option value="French">French</option>
+                        <option value="Poodle">Poodle</option>
+                        <option value="Shih Tzu">Shih Tzu</option>
+                        <option value="Corker spaniel">Corker spaniel</option>
+                        <option value="Pastor Belga">Pastor Belga</option>
+                        <option value="American Bully">American Bully</option>
+                        <option value="Bulldog Frances">Bulldog Frances</option>
+                        <option value="Bulldog Inglés">Bulldog Inglés</option>
+                        <option value="Doberman">Doberman</option>
+                        <option value="Rottweiler">Rottweiler</option>
+                        <option value="Pomerania">Pomerania</option>
+                        <option value="Beagle">Beagle</option>
+                        <option value="Boxer">Boxer</option>
+                        <option value="Golden Retriever">Golden Retriever</option>
+                        <option value="" disabled>-----RAZA DE GATOS-----</option>
+                        <option value="Siames">Siames</option>
+                        <option value="Angora">Angora</option>
+                        <option value="Abisinio">Abisinio</option>
+                        <option value="ragdoll">ragdoll</option>
+                        <option value="Siberiano">Siberiano</option>
+                        <option value="Birmano">Birmano</option>
+                        <option value="Mau egipcio">Mau egipcio</option>
+                        <option value="Maine Coon">Maine Coon</option>
+                        <option value="Bosque de noruega">Bosque de noruega</option>
+                        <option value="Nebelung">Nebelung</option>
+                        <option value="Gato persa">Gato persa</option>
+                        <option value="savannah">Savannah</option>
+                        <option value="Gato Oriental">Gato Oriental</option>
+                        <option value="Gato Exotico">Gato Exotico</option>
+                        <option value="British Shorthair">British Shorthair</option>
+                        <option value="Scottish Fold">Scottish Fold</option>
+                        <option value="Birmano">Birmano</option>
+                        <option value="Bengalí">Bengalí</option>
+                        <option value="Angora Turco">Angora Turco</option>
+                        <option value="Van Turco">Van Turco</option>
+                        <option value="Peterbald">Peterbald</option>
+                     </select> 
                     </div>
                     <div class="col-lg-4">
                       <label
