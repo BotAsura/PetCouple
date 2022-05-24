@@ -4,14 +4,15 @@
 }
 
 <h1>Match</h1>
-
+@foreach(var item in Model){
 <div class="card">
   <div class="card-header">
-    Hiciste Match Con:  
+    Hiciste Match Con: @item.Nombre
   </div>
   <div class="card-body">
     <h5 class="card-title">La cita se agendo en el siguiente Lugar: </h5>
-    <p class="card-text">Parque Recreativo Santa Cruz Meyehualco</p>
-    <a href="https://goo.gl/maps/ub9gpAqNE2smnbSf8" target="_blank" class="btn btn-primary">Mostrar Ubicacion en el Mapa</a>
+    <p class="card-text">@item.Lugar</p>
+    <a href="@item.Url" target="_blank" class="btn btn-primary">Mostrar Ubicacion en el Mapa</a>
   </div>
 </div>
+}

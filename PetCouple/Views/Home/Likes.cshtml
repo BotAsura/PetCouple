@@ -34,7 +34,7 @@
 </div>
 }
 <form asp-action="AcceptMatch" asp-controller="Home" method="post" id="frmAceptar">
-    
+    <input type="hidden" value="" name="IdAceptar" id="aceptar" />
 </form>
 <form asp-action="DeniedMatch" asp-controller="Home" method="post" id="frmNegar">
     <input type="hidden" value="" name="IdDenegar" id="denegar" />
@@ -42,7 +42,7 @@
 
 <script>
     function acept(id){
-        
+        document.getElementById("aceptar").value = id; 
         frmAceptar.submit();
     }
     function negar(id){

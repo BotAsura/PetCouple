@@ -108,8 +108,9 @@ namespace PetCouple.Controllers
             return File(new UsuariosCLS().getImageLike(id), "image/*");
         }
         [HttpPost]
-        public IActionResult AcceptMatch()
+        public IActionResult AcceptMatch(int IdAceptar)
         {
+            new UsuariosCLS().aceptarMatc(IdAceptar);
             return RedirectToAction("Likes");
         }
         [HttpPost]
@@ -120,7 +121,7 @@ namespace PetCouple.Controllers
         }
 
         public IActionResult Match() {
-            return View();
+            return View(new UsuariosCLS().ListUsuariosMatch());
         }
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

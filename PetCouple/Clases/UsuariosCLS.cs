@@ -141,18 +141,65 @@ namespace PetCouple.Clases
                 return getUsuario.Foto;
             }
         }
-        public void aceptarMatc() { 
+        public void aceptarMatc(int id) {
+            using (PetCoupleContext db = new PetCoupleContext())
+            {
+                var getLike = db.Likes.Where(x => x.Usuario1 == id && x.Usuario2 == Usuario).FirstOrDefault();
+                if (getLike != null)
+                {
+                    Interaccion match = new Interaccion();
+                    match.Usuario1 = Usuario;
+                    match.Usuario2 = id;
+                    match.Match = true;
+                    match.IdParque = 1;
+
+                    db.Interaccion.Add(match);
+
+                    getLike.Visibilidad = false;
+                    db.SaveChanges();
+                }
+            }
         }
         public void negarMatch(int id) {
             using (PetCoupleContext db = new PetCoupleContext()) {
                 var getLike = db.Likes.Where(x => x.Usuario1 == id && x.Usuario2 == Usuario ).FirstOrDefault();
                 if (getLike != null)
                 {
+
                     getLike.Visibilidad = false;
                     db.SaveChanges();
                 }
             }
         }
+        public List<MatchCLS> ListUsuariosMatch() {
+            using (PetCoupleContext db = new PetCoupleContext()) {
+                List<MatchCLS> getListUser = new List<MatchCLS>();
+                var getMatch = db.Interaccion.Where(x => x.Usuario1 == Usuario).ToList();
+                
+                for (int i = 0; i <= getMatch.Count; i++)
+                {
+                    try
+                    {
+                        var getUsuario2 = db.Usuarios.Where(x => x.IdUsuario == getMatch[i].Usuario2).FirstOrDefault();
+                        if (getUsuario2 != null)
+                        {
+                            string nombre = getUsuario2.NombreCompleto;
+                            string lugar = db.Parques.Where(x => x.IdParque == getMatch[i].IdParque).First().Lugar;
+                            string url = db.Parques.Where(x => x.IdParque == getMatch[i].IdParque).First().Url;
+
+                            getListUser.Add(new MatchCLS { Nombre = nombre, Lugar = lugar, Url = url });
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        return getListUser;
+                    }
+
+                }
+                return getListUser;
+            }
+        }
+
     }
 }
 
