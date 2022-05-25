@@ -66,28 +66,57 @@ namespace PetCouple.Clases
         public byte[] getImage() {
             using (PetCoupleContext db = new PetCoupleContext())
             {
-                var getLength = db.Usuarios.Count();
-                for (int i = 1; i <= getLength; i++)
-                {
-                    var getUsuario = db.Usuarios.Where(x => x.IdUsuario == i).First();
-                    var getLike = db.Likes.Where(x => x.Usuario2 == getUsuario.IdUsuario).FirstOrDefault();
-                    if (getLike != null)
+                List<Usuarios> getUsuarios = db.Usuarios.ToList();                
+                for (int i = 0; i <= getUsuarios.Count; i++)
+                {                    
+                    if (!(getUsuarios[i].IdUsuario == Usuario))
                     {
-                        if (!((getLike.Like == "Si" || getLike.Like == "No")))
-                        { 
-                            UserScreen = getUsuario.IdUsuario;
-                            return getUsuario.Foto;                             
-                        }
-                    }
-                    else
-                    {
-                        if (getUsuario.IdUsuario != Usuario)
+                        var getLike = db.Likes.Where(x => x.Usuario1 == Usuario).ToList();
+                        if (getLike.Count != 0)
                         {
-                            UserScreen = getUsuario.IdUsuario;
-                            return getUsuario.Foto; 
+                            try
+                            {                                
+                                if (!(getLike[i].Like == "Si" || getLike[i].Like == "No")) return null;                                
+                            }
+                            catch (System.Exception)
+                            {                                
+                                UserScreen = getUsuarios[i].IdUsuario;
+                                return getUsuarios[i].Foto;                                                       
+                            }                            
+                        }
+                        else
+                        {
+                            UserScreen = getUsuarios[i].IdUsuario;
+                            return getUsuarios[i].Foto;
                         }
                     }
-                }                
+                }
+
+                //var getLength = db.Usuarios.Count();
+                //for (int i = 1; i <= getLength; i++)
+                //{
+                //    var getUsuario = db.Usuarios.Where(x => x.IdUsuario == i).First();
+                //    var getLike = db.Likes.Where(x => x.Usuario2 == getUsuario.IdUsuario ).FirstOrDefault();
+                //    if (getLike != null)
+                //    {
+                //        if (!((getLike.Like == "Si" || getLike.Like == "No")))
+                //        {
+                //            if (!(getUsuario.IdUsuario == Usuario))
+                //            {
+                //                UserScreen = getUsuario.IdUsuario;
+                //                return getUsuario.Foto; 
+                //            }
+                //        }
+                //    }
+                //    else
+                //    {
+                //        if (getUsuario.IdUsuario != Usuario)
+                //        {
+                //            UserScreen = getUsuario.IdUsuario;
+                //            return getUsuario.Foto; 
+                //        }
+                //    }
+                //}                
                 return null;
             }            
         }
@@ -98,6 +127,7 @@ namespace PetCouple.Clases
                 setLikes.Usuario1 = Usuario;
                 setLikes.Usuario2 = getUsuario2;
                 setLikes.Like = "Si";
+                setLikes.Visibilidad = true;
                 db.Likes.Add(setLikes);
 
                 db.SaveChanges();
@@ -111,6 +141,7 @@ namespace PetCouple.Clases
                 setLikes.Usuario1 = Usuario;
                 setLikes.Usuario2 = getUsuario2;
                 setLikes.Like = "No";
+                setLikes.Visibilidad = false;
                 db.Likes.Add(setLikes);
 
                 db.SaveChanges();
