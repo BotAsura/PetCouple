@@ -68,20 +68,28 @@ namespace PetCouple.Clases
             {
                 List<Usuarios> getUsuarios = db.Usuarios.ToList();                
                 for (int i = 0; i <= getUsuarios.Count; i++)
-                {                    
+                {
                     if (!(getUsuarios[i].IdUsuario == Usuario))
-                    {
+                    {                        
                         var getLike = db.Likes.Where(x => x.Usuario1 == Usuario).ToList();
                         if (getLike.Count != 0)
                         {
                             try
-                            {                                
+                            {
                                 if (!(getLike[i].Like == "Si" || getLike[i].Like == "No")) return null;                                
+
                             }
                             catch (System.Exception)
-                            {                                
-                                UserScreen = getUsuarios[i].IdUsuario;
-                                return getUsuarios[i].Foto;                                                       
+                            {
+                                try
+                                {
+                                        if (!(getLike[i-1].Like == "Si" || getLike[i-1].Like == "No")) return null;
+                                }
+                                catch (System.Exception)
+                                {
+                                    UserScreen = getUsuarios[i].IdUsuario;
+                                    return getUsuarios[i].Foto;
+                                }    
                             }                            
                         }
                         else
@@ -90,33 +98,7 @@ namespace PetCouple.Clases
                             return getUsuarios[i].Foto;
                         }
                     }
-                }
-
-                //var getLength = db.Usuarios.Count();
-                //for (int i = 1; i <= getLength; i++)
-                //{
-                //    var getUsuario = db.Usuarios.Where(x => x.IdUsuario == i).First();
-                //    var getLike = db.Likes.Where(x => x.Usuario2 == getUsuario.IdUsuario ).FirstOrDefault();
-                //    if (getLike != null)
-                //    {
-                //        if (!((getLike.Like == "Si" || getLike.Like == "No")))
-                //        {
-                //            if (!(getUsuario.IdUsuario == Usuario))
-                //            {
-                //                UserScreen = getUsuario.IdUsuario;
-                //                return getUsuario.Foto; 
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        if (getUsuario.IdUsuario != Usuario)
-                //        {
-                //            UserScreen = getUsuario.IdUsuario;
-                //            return getUsuario.Foto; 
-                //        }
-                //    }
-                //}                
+                }             
                 return null;
             }            
         }
