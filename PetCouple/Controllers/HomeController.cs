@@ -40,16 +40,16 @@ namespace PetCouple.Controllers
         {
             if (new UsuariosCLS().Ingresar(usuarios))
             {
-                var claimsAdmin = new List<Claim>
+                var claims = new List<Claim>
                     {
                         new Claim("Usuario", usuarios.Usuario),
                         new Claim("Contraseña", usuarios.Contraseña),
 
                     };
 
-                claimsAdmin.Add(new Claim(ClaimTypes.Role, "Usuario"));
+                claims.Add(new Claim(ClaimTypes.Role, "Usuario"));
 
-                var claimsIdentityAdmin = new ClaimsIdentity(claimsAdmin, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsIdentityAdmin = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentityAdmin));
                 return RedirectToAction("Inicio");
@@ -149,8 +149,31 @@ namespace PetCouple.Controllers
         public IActionResult Match() {
             return View(new UsuariosCLS().ListUsuariosMatch());
         }
+        [HttpGet]
+        [Authorize(Roles = "Usuario")]
         public IActionResult Configuracion(){
-            return View();
+
+            ViewBag.Mensaje = "";
+            ViewBag.Bool = false;
+            return View(new UsuariosCLS().infoUsuario());
+        }
+        [HttpPost]
+        [Authorize(Roles ="Usuario")]
+        public IActionResult Configuracion(Usuarios user, IFormFile image) {
+            string wwwRootPath = hostEnvironment.WebRootPath;
+            string extension = Path.GetExtension(image.FileName);
+            string fileName = DateTime.Now.ToString("yymmssfff");
+            string path = Path.Combine(wwwRootPath + "/img/", fileName + extension);
+
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                image.CopyTo(fileStream);
+            }
+
+            ViewBag.Mensaje = new UsuariosCLS().Modificar(user, Imagen_A_Bytes(path), fileName, path);
+            ViewBag.Bool = true;
+
+            return RedirectToAction("Configuracion");
         }
         public async Task<IActionResult> CerrarSesion() {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

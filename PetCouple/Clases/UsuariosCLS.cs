@@ -12,7 +12,6 @@ namespace PetCouple.Clases
         private static int UserScreen;
         private static int usuario;        
 
-
         public int Usuario { get => usuario; set => usuario = value; }
 
         public bool Ingresar(Usuarios user)
@@ -210,6 +209,49 @@ namespace PetCouple.Clases
 
                 }
                 return getListUser;
+            }
+        }
+        public string Modificar(Usuarios user, byte[] image, string fileName, string path)
+        {
+            using (PetCoupleContext db = new PetCoupleContext())
+            {
+                Usuarios setUsuario = db.Usuarios.Where(x => x.IdUsuario == usuario).First();
+
+                setUsuario.Usuario = user.Usuario.ToLower();
+                setUsuario.Contraseña = user.Contraseña.ToLower();
+                setUsuario.Correo = user.Correo;
+                setUsuario.Delegacion = user.Delegacion;
+                setUsuario.NombreMascota = user.NombreMascota;
+                setUsuario.EdadMascota = user.EdadMascota;
+                setUsuario.Sexo = user.Sexo;
+                if (image != null)
+                {
+                    setUsuario.Foto = image; 
+                }
+                setUsuario.Raza = user.Raza;
+                setUsuario.NombreCompleto = user.NombreCompleto;
+                setUsuario.NumeroTel = user.NumeroTel;
+                setUsuario.Identficador = fileName;
+
+                try
+                {
+                    db.Usuarios.Update(setUsuario);
+
+                    db.SaveChanges();
+
+                    return "Todo bien";
+                }
+                catch (System.Exception ex)
+                {
+
+                    return "Todo Mal + " + ex.Message;
+                }
+            }
+        }
+        public List<Usuarios> infoUsuario() {
+            using (PetCoupleContext db = new PetCoupleContext()) {
+                var getUsuario = db.Usuarios.Where(x => x.IdUsuario == usuario).ToList();
+                return getUsuario;
             }
         }
 

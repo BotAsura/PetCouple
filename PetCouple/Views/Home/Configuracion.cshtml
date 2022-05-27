@@ -1,7 +1,259 @@
-﻿
+﻿@model List<Usuarios>
 @{
     ViewData["Title"] = "Configuracion";
 }
 
 <h1>Configuracion</h1>
 
+<div id="MascotaConfig">
+    <img src="@Url.Action("GetImageLike", new { id = @Model[0].IdUsuario })" style="width:250px" alt="" />        
+</div>
+<div class="container">
+    <div class="row">        
+        <form
+          asp-action="Configuracion"
+          asp-controller="Home"                                        
+          method="post"  
+          class="row"
+          enctype="multipart/form-data"
+        >                  
+        <div class="col-lg-4">
+            <label
+              for="lblCorreo"
+              class="col-form-label col-form-label-lg"
+              >Correo:</label
+            >
+            <input
+              type="email"
+              name="Correo"
+              id="lblCorreo"
+              class="form-control form-control-lg"
+              placeholder="Coloca tú Correo aquí"
+              value="@Model[0].Correo"
+              required
+            />
+          </div>                    
+          <div class="col-lg-4">
+            <label
+              for="lblUser"
+              class="col-form-label col-form-label-lg"
+              >Usuario:</label
+            >
+            <input
+              type="text"
+              name="Usuario"
+              id="lblUser"
+              class="form-control form-control-lg"
+              placeholder="Coloca tú usuario aquí"
+              value="@Model[0].Usuario"
+              required
+            />
+          </div>                    
+          <div class="col-lg-4">
+            <label
+              for="lblPass"
+              class="col-form-label col-form-label-lg"
+              >Contraseña:</label
+            >
+            <input
+              type="password"
+              name="Contraseña"
+              id="lblPass"
+              placeholder="Coloca tú contraseña aquí"
+              class="form-control form-control-lg"              
+              required
+            />
+          </div>                    
+          <div class="col-lg-4">
+            <label
+              for="lblDelegacion"
+              class="col-form-label col-form-label-lg"
+              >Delegacion:</label
+            >                   
+            <input class="form-control form-control-lg" 
+            list="datalistDelegacion" 
+            id="lblDelegacion" 
+            name="Delegacion" 
+            placeholder="Busca tú delegación">
+            <datalist id="datalistDelegacion">
+              <option value="Álvaro Obregón"/>
+              <option value="Azcapotzalco"/>
+              <option value="Benito Juárez"/>
+              <option value="Coyoacán"/>
+              <option value="Cuajimalpa de Morelos"/>
+              <option value="Cuactécmoc"/>
+              <option value="Gustavo A. Madero"/>
+              <option value="Iztacalco"/>
+              <option value="Iztapalapa"/>
+              <option value="Magdalena Contreras"/>
+              <option value="Miguel Hidalgo"/>
+              <option value="Milpa Alta"/>
+              <option value="Tláhuac"/>
+              <option value="Tlalpan"/>
+              <option value="Venustiano Carranza"/>
+              <option value="Xochimilco"/>
+            </datalist>
+          </div>                          
+          <div class="col-lg-4">
+            <label
+              for="lblNombreMascota"
+              class="col-form-label col-form-label-lg"
+              >Nombre Mascota:</label
+            >
+            <input
+              type="text"
+              name="NombreMascota"
+              id="lblNombreMascota"
+              placeholder="Coloca su nombre aquí"
+              class="form-control form-control-lg"
+              value="@Model[0].NombreMascota"
+              required
+            />
+          </div>
+          <div class="col-lg-4">
+            <label
+              for="lblEdadMascota"
+              class="col-form-label col-form-label-lg"
+              >Edad Mascota:</label
+            >
+            <input
+              type="text"
+              name="EdadMascota"
+              id="lblEdadMascota"
+              placeholder="Coloca su edad aquí"
+              class="form-control form-control-lg"
+              value="@Model[0].EdadMascota"
+              required
+            />
+          </div>
+          
+          <div class="col-lg-4">
+            <label
+              for="lblRaza"
+              class="col-form-label col-form-label-lg"
+              >Nombre su Raza:</label
+            >
+            <select class="form-control form-control-lg form-select" 
+            list="datalistRazaPerro" 
+            id="lblRazaPerro" 
+            name="Raza" 
+            placeholder="Busca la raza de tu Perro">   
+             <option required value="" disabled selected>-----ESCOGE LA RAZA-----</option>
+              <option value="" disabled>-----RAZA DE GATOS-----</option>
+              <option value="Labrador">Labrador</option>
+              <option value="Pug">Pug</option>
+              <option value="Schnauzer">Schunauzer</option>
+              <option value="Husky Siberiano">Husky Siberiano</option>
+              <option value="Pastor Alemán">Pastor Alemán</option>
+              <option value="Chihuahua">Chihuahua</option>
+              <option value="PitBull">PitBull</option>
+              <option value="Beagle">Beagle</option>
+              <option value="Boxer">Boxer</option>
+              <option value="San Bernardo">San Bernardo</option>
+              <option value="French">French</option>
+              <option value="Poodle">Poodle</option>
+              <option value="Shih Tzu">Shih Tzu</option>
+              <option value="Corker spaniel">Corker spaniel</option>
+              <option value="Pastor Belga">Pastor Belga</option>
+              <option value="American Bully">American Bully</option>
+              <option value="Bulldog Frances">Bulldog Frances</option>
+              <option value="Bulldog Inglés">Bulldog Inglés</option>
+              <option value="Doberman">Doberman</option>
+              <option value="Rottweiler">Rottweiler</option>
+              <option value="Pomerania">Pomerania</option>
+              <option value="Beagle">Beagle</option>
+              <option value="Boxer">Boxer</option>
+              <option value="Golden Retriever">Golden Retriever</option>
+              <option value="" disabled>-----RAZA DE GATOS-----</option>
+              <option value="Siames">Siames</option>
+              <option value="Angora">Angora</option>
+              <option value="Abisinio">Abisinio</option>
+              <option value="ragdoll">ragdoll</option>
+              <option value="Siberiano">Siberiano</option>
+              <option value="Birmano">Birmano</option>
+              <option value="Mau egipcio">Mau egipcio</option>
+              <option value="Maine Coon">Maine Coon</option>
+              <option value="Bosque de noruega">Bosque de noruega</option>
+              <option value="Nebelung">Nebelung</option>
+              <option value="Gato persa">Gato persa</option>
+              <option value="savannah">Savannah</option>
+              <option value="Gato Oriental">Gato Oriental</option>
+              <option value="Gato Exotico">Gato Exotico</option>
+              <option value="British Shorthair">British Shorthair</option>
+              <option value="Scottish Fold">Scottish Fold</option>
+              <option value="Birmano">Birmano</option>
+              <option value="Bengalí">Bengalí</option>
+              <option value="Angora Turco">Angora Turco</option>
+              <option value="Van Turco">Van Turco</option>
+              <option value="Peterbald">Peterbald</option>
+           </select> 
+          </div>
+          <div class="col-lg-4">
+            <label
+              for="lblNombreCompleto"
+              class="col-form-label col-form-label-lg"
+              >Nombre Completo:</label
+            >
+            <input
+              type="text"
+              name="NombreCompleto"
+              id="lblNombreCompleto"
+              placeholder="Coloca su Nombre completo"
+              class="form-control form-control-lg"
+              value="@Model[0].NombreCompleto"
+              required
+            />
+          </div>
+          <div class="col-lg-4">
+            <label
+              for="lblNumeroTel"
+              class="col-form-label col-form-label-lg"
+              >Número de celular:</label
+            >
+            <input
+              type="tel"
+              name="NumeroTel"
+              id="lblNumeroTel"
+              placeholder="Coloca su Celular aquí"
+              class="form-control form-control-lg"
+              value="@Model[0].NumeroTel"
+              required
+            />
+          </div>
+          <div class="col-lg-6">    
+            <label
+              for="lblSexo"
+              class="col-form-label col-form-label-lg"
+              >Sexo de la mascota:</label
+            >
+            <select name="Sexo" id="lblSexo" class="form-select form-control form-control-lg" aria-label="Sexo de la mascota" required>
+              <option selected disabled>Selecciona el genero</option>
+              <option value="Hembra">Hembra</option>
+              <option value="Macho">Macho</option>                        
+            </select>
+          </div>
+          <div class="col-lg-6">                      
+            <label 
+            for="lblFoto" 
+            class="col-form-label col-form-label-lg">
+                Foto de la Mascota:</label>
+            <input 
+            class="form-control mt-1" 
+            type="file" 
+            name="image"
+            id="lblFoto"
+            accept="image/*"            
+            required
+            >            
+          </div>
+          <div class="text-center col-lg-12 mt-4">
+            <button
+              class="btn btn-primary btn-lg btn-block"
+              type="submit"                        
+            >
+              Cambiar Informacion
+            </button>
+          </div>
+        </form>                        
+    </div>
+</div>

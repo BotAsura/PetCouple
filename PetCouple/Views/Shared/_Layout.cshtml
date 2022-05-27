@@ -9,12 +9,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/index.css/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>        
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>           
 </head>
 <body>
     <header>
-       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
          <div class="container-fluid">
            <a class="navbar-brand" href="#"><i class="fa-solid fa-cat"></i> PetCouple</a>
            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +34,7 @@
                  <a class="nav-link" asp-action="Configuracion" asp-controller="Home">Configuracion</a>
                </li>
                <li class="nav-item">
-                 <a class="nav-link" asp-action="Cerrar" asp-controller="Home">@ViewData["Usuario"] <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                 <a class="nav-link" asp-action="CerrarSesion" asp-controller="Home">@ViewData["Usuario"] <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                </li>
              </ul>
            </div>
@@ -48,7 +47,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-dark">
         <div class="container">
             &copy; 2022 - PetCouple - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

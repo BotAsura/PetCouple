@@ -1,8 +1,14 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-.contenedor {
-    display: flex;    
+#MascotaConfig {
+    display: flex;
     justify-content: center;
+    align-items: center;
+}
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 @keyframes animacion {
     0% {
@@ -52,11 +58,11 @@ h1 {
     justify-content: space-around;
 }
 
-.buttons > button {
-    border: none;
-    background-color: white;
-    outline: none;
-}
+    .buttons > button {
+        border: none;
+        
+        outline: none;
+    }
 
 .icon {
     font-size: 64px;
