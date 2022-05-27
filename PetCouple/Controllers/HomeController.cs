@@ -12,6 +12,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Drawing;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PetCouple.Controllers
 {
@@ -28,17 +32,32 @@ namespace PetCouple.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            ViewBag.Bool = false;
             return View();
         }
         [HttpPost]
-        public IActionResult Login(Usuarios usuarios)
+        public async Task<IActionResult> Login(Usuarios usuarios)
         {
             if (new UsuariosCLS().Ingresar(usuarios))
             {
+                var claimsAdmin = new List<Claim>
+                    {
+                        new Claim("Usuario", usuarios.Usuario),
+                        new Claim("Contraseña", usuarios.Contraseña),
+
+                    };
+
+                claimsAdmin.Add(new Claim(ClaimTypes.Role, "Usuario"));
+
+                var claimsIdentityAdmin = new ClaimsIdentity(claimsAdmin, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentityAdmin));
                 return RedirectToAction("Inicio");
             }
+            ViewBag.Bool = true;
             return View();
         }
+
         [HttpGet]
         public IActionResult Registro()
         {
@@ -80,48 +99,65 @@ namespace PetCouple.Controllers
             byte[] imagen = new UsuariosCLS().getImage();
             return File(imagen, "image/*");
         }
+        [Authorize(Roles = "Usuario")]
         public IActionResult SinAnimales() {
             return View();
         }
         [HttpGet]
+        [Authorize(Roles = "Usuario")]
         public IActionResult Inicio() {
+            ViewBag.Usuario = new UsuariosCLS().Usuario;
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Usuario")]
         public IActionResult Aceptar() {
             new UsuariosCLS().aceptar();
             return RedirectToAction("Inicio");
         }
         [HttpPost]
+        [Authorize(Roles = "Usuario")]
         public IActionResult Rechazar() {
             new UsuariosCLS().rechazar();
             return RedirectToAction("Inicio");
         }
-
+        [Authorize(Roles = "Usuario")]
         public IActionResult Likes()
         {
             return View(new UsuariosCLS().ListUsuarioLikes());
         }
-
+        [Authorize(Roles = "Usuario")]
         public IActionResult GetImageLike(int id) {
 
             return File(new UsuariosCLS().getImageLike(id), "image/*");
         }
         [HttpPost]
+        [Authorize(Roles = "Usuario")]
         public IActionResult AcceptMatch(int IdAceptar)
         {
             new UsuariosCLS().aceptarMatc(IdAceptar);
             return RedirectToAction("Likes");
         }
         [HttpPost]
+        [Authorize(Roles = "Usuario")]
         public IActionResult DeniedMatch(int IdDenegar)
         {
             new UsuariosCLS().negarMatch(IdDenegar);
             return RedirectToAction("Likes");
         }
-
+        [Authorize(Roles = "Usuario")]
         public IActionResult Match() {
             return View(new UsuariosCLS().ListUsuariosMatch());
+        }
+        public IActionResult Configuracion(){
+            return View();
+        }
+        public async Task<IActionResult> CerrarSesion() {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login");
+        }
+        public IActionResult Denegado() {
+            return View();
         }
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

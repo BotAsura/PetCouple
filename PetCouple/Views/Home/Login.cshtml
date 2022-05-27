@@ -39,6 +39,12 @@
                       height="auto"
                     />
                   </div>
+                  @if (ViewBag.Bool)
+                  {
+                      <div class="alert alert-danger" role="alert">
+                         Usuario y/o Contraseña incorrectos
+                      </div>
+                  }
                   <form
                     asp-action="Login"
                     asp-controller="Home"                                        
