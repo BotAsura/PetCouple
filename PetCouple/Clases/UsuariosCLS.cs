@@ -1,4 +1,5 @@
 ﻿using PetCouple.Models;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -159,14 +160,16 @@ namespace PetCouple.Clases
         public void aceptarMatc(int id) {
             using (PetCoupleContext db = new PetCoupleContext())
             {
+                Random rd = new Random();
                 var getLike = db.Likes.Where(x => x.Usuario1 == id && x.Usuario2 == Usuario).FirstOrDefault();
+                var getLugar = db.Parques.ToList();
                 if (getLike != null)
                 {
                     Interaccion match = new Interaccion();
                     match.Usuario1 = Usuario;
                     match.Usuario2 = id;
                     match.Match = true;
-                    match.IdParque = 1;
+                    match.IdParque = rd.Next(1,getLugar.Count());
 
                     db.Interaccion.Add(match);
 
