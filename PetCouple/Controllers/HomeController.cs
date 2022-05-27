@@ -101,34 +101,39 @@ namespace PetCouple.Controllers
         }
         [Authorize(Roles = "Usuario")]
         public IActionResult SinAnimales() {
+            ViewBag.Usuario = new UsuariosCLS().UserName;
             return View();
         }
         [HttpGet]
         [Authorize(Roles = "Usuario")]
         public IActionResult Inicio() {
-            ViewBag.Usuario = new UsuariosCLS().Usuario;
+            ViewBag.Usuario = new UsuariosCLS().UserName;
             return View();
         }
         [HttpPost]
         [Authorize(Roles = "Usuario")]
         public IActionResult Aceptar() {
             new UsuariosCLS().aceptar();
+            ViewBag.Usuario = new UsuariosCLS().UserName;
             return RedirectToAction("Inicio");
         }
         [HttpPost]
         [Authorize(Roles = "Usuario")]
         public IActionResult Rechazar() {
             new UsuariosCLS().rechazar();
+            ViewBag.Usuario = new UsuariosCLS().UserName;
             return RedirectToAction("Inicio");
         }
+
         [Authorize(Roles = "Usuario")]
         public IActionResult Likes()
         {
+            ViewBag.Usuario = new UsuariosCLS().UserName;
             return View(new UsuariosCLS().ListUsuarioLikes());
         }
         [Authorize(Roles = "Usuario")]
         public IActionResult GetImageLike(int id) {
-
+            ViewBag.Usuario = new UsuariosCLS().UserName;
             return File(new UsuariosCLS().getImageLike(id), "image/*");
         }
         [HttpPost]
@@ -147,12 +152,13 @@ namespace PetCouple.Controllers
         }
         [Authorize(Roles = "Usuario")]
         public IActionResult Match() {
+            ViewBag.Usuario = new UsuariosCLS().UserName;
             return View(new UsuariosCLS().ListUsuariosMatch());
         }
         [HttpGet]
         [Authorize(Roles = "Usuario")]
         public IActionResult Configuracion(){
-
+            ViewBag.Usuario = new UsuariosCLS().UserName;
             ViewBag.Mensaje = "";
             ViewBag.Bool = false;
             return View(new UsuariosCLS().infoUsuario());

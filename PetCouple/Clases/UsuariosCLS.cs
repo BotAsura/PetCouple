@@ -10,9 +10,11 @@ namespace PetCouple.Clases
     {
 
         private static int UserScreen;
-        private static int usuario;        
+        private static int usuario;
+        private static string userName;
 
         public int Usuario { get => usuario; set => usuario = value; }
+        public string UserName { get => userName; set => userName = value; }
 
         public bool Ingresar(Usuarios user)
         {
@@ -23,6 +25,7 @@ namespace PetCouple.Clases
                 if (nveces != 0)
                 {
                     Usuario = db.Usuarios.Where(x => x.Usuario == user.Usuario.ToLower() && x.Contraseña == user.Contraseña.ToLower()).First().IdUsuario;
+                    UserName = db.Usuarios.Where(x => x.Usuario == user.Usuario.ToLower() && x.Contraseña == user.Contraseña.ToLower()).First().Usuario.ToUpper();
                     return true;
                 }
             }
