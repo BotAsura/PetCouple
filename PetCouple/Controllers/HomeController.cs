@@ -80,7 +80,7 @@ namespace PetCouple.Controllers
 
             ViewBag.Bool = true;
 
-            return RedirectToAction("Login");
+            return View();
         }
         public Byte[] Imagen_A_Bytes(String ruta)
         {
@@ -124,7 +124,6 @@ namespace PetCouple.Controllers
             ViewBag.Usuario = new UsuariosCLS().UserName;
             return RedirectToAction("Inicio");
         }
-
         [Authorize(Roles = "Usuario")]
         public IActionResult Likes()
         {

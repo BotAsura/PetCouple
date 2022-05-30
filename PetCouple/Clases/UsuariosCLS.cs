@@ -36,6 +36,12 @@ namespace PetCouple.Clases
         {
             using (PetCoupleContext db = new PetCoupleContext()) {
 
+                var getUsuario = db.Usuarios.Where(x => x.Usuario == user.Usuario.ToUpper()).FirstOrDefault();
+                if (getUsuario!= null)
+                {
+                    return "El nombre de usuario ya fue regiustrado prueba con otro";
+                }
+
                 Usuarios setUsuario = new Usuarios();
                 
                 setUsuario.Usuario = user.Usuario.ToLower();
@@ -57,12 +63,12 @@ namespace PetCouple.Clases
 
                     db.SaveChanges();
                     
-                    return "Todo bien";
+                    return "El Usuario Fue registrado con éxito";
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
 
-                    return "Todo Mal + " + ex.Message;
+                    return "El usuario no se pudo registrar";
                 }
             }
         }
