@@ -77,7 +77,7 @@ namespace PetCouple.Clases
             {
                 List<Usuarios> getUsuarios = db.Usuarios.ToList();         
                 var getUser = db.Usuarios.Where(x => x.IdUsuario == Usuario).First();
-                for (int i = 0; i <= getUsuarios.Count; i++)
+                for (int i = 2; i <= getUsuarios.Count; i++)
                 {
                     if (!(getUsuarios[i].IdUsuario == Usuario))
                     {                        
@@ -98,10 +98,17 @@ namespace PetCouple.Clases
                                 }
                                 catch (System.Exception)
                                 {
-                                    if (getUsuarios[i].IdTipo == getUser.IdTipo)
+                                    try
                                     {
-                                        UserScreen = getUsuarios[i].IdUsuario;
-                                        return getUsuarios[i].Foto; 
+                                        if (!(getLike[i - 2].Like == "Si" || getLike[i - 2].Like == "No")) return null;
+                                    }
+                                    catch (Exception)
+                                    {
+                                        if (getUsuarios[i].IdTipo == getUser.IdTipo)
+                                        {
+                                            UserScreen = getUsuarios[i].IdUsuario;
+                                            return getUsuarios[i].Foto;
+                                        }
                                     }
                                 }    
                             }                            
