@@ -26,11 +26,12 @@ namespace PetCouple.Models
         public string EdadMascota { get; set; }
         public string Sexo { get; set; }
         public byte[] Foto { get; set; }
-        public string Raza { get; set; }
+        public int IdTipo { get; set; }
         public string NombreCompleto { get; set; }
         public string NumeroTel { get; set; }
         public string Identficador { get; set; }
 
+        public virtual Tipo IdTipoNavigation { get; set; }
         public virtual ICollection<Interaccion> InteraccionUsuario1Navigation { get; set; }
         public virtual ICollection<Interaccion> InteraccionUsuario2Navigation { get; set; }
         public virtual ICollection<Likes> LikesUsuario1Navigation { get; set; }

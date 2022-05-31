@@ -52,7 +52,7 @@ namespace PetCouple.Clases
                 setUsuario.EdadMascota = user.EdadMascota;
                 setUsuario.Sexo =  user.Sexo;
                 setUsuario.Foto = image;
-                setUsuario.Raza = user.Raza;
+                setUsuario.IdTipo = user.IdTipo;
                 setUsuario.NombreCompleto = user.NombreCompleto;
                 setUsuario.NumeroTel = user.NumeroTel;
                 setUsuario.Identficador = fileName;
@@ -75,12 +75,14 @@ namespace PetCouple.Clases
         public byte[] getImage() {
             using (PetCoupleContext db = new PetCoupleContext())
             {
-                List<Usuarios> getUsuarios = db.Usuarios.ToList();                
+                List<Usuarios> getUsuarios = db.Usuarios.ToList();         
+                var getUser = db.Usuarios.Where(x => x.IdUsuario == Usuario).First();
                 for (int i = 0; i <= getUsuarios.Count; i++)
                 {
                     if (!(getUsuarios[i].IdUsuario == Usuario))
                     {                        
                         var getLike = db.Likes.Where(x => x.Usuario1 == Usuario).ToList();
+
                         if (getLike.Count != 0)
                         {
                             try
@@ -92,19 +94,25 @@ namespace PetCouple.Clases
                             {
                                 try
                                 {
-                                        if (!(getLike[i-1].Like == "Si" || getLike[i-1].Like == "No")) return null;
+                                    if (!(getLike[i-1].Like == "Si" || getLike[i-1].Like == "No")) return null;
                                 }
                                 catch (System.Exception)
                                 {
-                                    UserScreen = getUsuarios[i].IdUsuario;
-                                    return getUsuarios[i].Foto;
+                                    if (getUsuarios[i].IdTipo == getUser.IdTipo)
+                                    {
+                                        UserScreen = getUsuarios[i].IdUsuario;
+                                        return getUsuarios[i].Foto; 
+                                    }
                                 }    
                             }                            
                         }
                         else
                         {
-                            UserScreen = getUsuarios[i].IdUsuario;
-                            return getUsuarios[i].Foto;
+                            if (getUsuarios[i].IdTipo == getUser.IdTipo)
+                            {
+                                UserScreen = getUsuarios[i].IdUsuario;
+                                return getUsuarios[i].Foto; 
+                            }
                         }
                     }
                 }             
@@ -168,6 +176,8 @@ namespace PetCouple.Clases
             {
                 Random rd = new Random();
                 var getLike = db.Likes.Where(x => x.Usuario1 == id && x.Usuario2 == Usuario).FirstOrDefault();
+                var getUsuario = db.Usuarios.Where(x => x.IdUsuario == id).First();
+                new CorreoCLS(getUsuario.Correo).smtpCorreo();
                 var getLugar = db.Parques.ToList();
                 if (getLike != null)
                 {
@@ -240,7 +250,7 @@ namespace PetCouple.Clases
                 {
                     setUsuario.Foto = image; 
                 }
-                setUsuario.Raza = user.Raza;
+                setUsuario.IdTipo = user.IdTipo;
                 setUsuario.NombreCompleto = user.NombreCompleto;
                 setUsuario.NumeroTel = user.NumeroTel;
                 setUsuario.Identficador = fileName;

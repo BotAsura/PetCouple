@@ -22,6 +22,7 @@ namespace PetCouple.Models
         public virtual DbSet<Interaccion> Interaccion { get; set; }
         public virtual DbSet<Likes> Likes { get; set; }
         public virtual DbSet<Parques> Parques { get; set; }
+        public virtual DbSet<Tipo> Tipo { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -37,7 +38,7 @@ namespace PetCouple.Models
             modelBuilder.Entity<Interaccion>(entity =>
             {
                 entity.HasKey(e => e.IdInteraccion)
-                    .HasName("PK__Interacc__18BDD9FC596C6C42");
+                    .HasName("PK__Interacc__18BDD9FC990E9190");
 
                 entity.Property(e => e.IdInteraccion).HasColumnName("Id_Interaccion");
 
@@ -63,7 +64,7 @@ namespace PetCouple.Models
             modelBuilder.Entity<Likes>(entity =>
             {
                 entity.HasKey(e => e.IdLikes)
-                    .HasName("PK__Likes__F8B738475EAD98FD");
+                    .HasName("PK__Likes__F8B73847F9DB7748");
 
                 entity.Property(e => e.IdLikes).HasColumnName("Id_Likes");
 
@@ -85,7 +86,7 @@ namespace PetCouple.Models
             modelBuilder.Entity<Parques>(entity =>
             {
                 entity.HasKey(e => e.IdParque)
-                    .HasName("PK__Parques__43EDB85E3BAFD27C");
+                    .HasName("PK__Parques__43EDB85E0245FDA9");
 
                 entity.Property(e => e.IdParque).HasColumnName("Id_Parque");
 
@@ -96,10 +97,22 @@ namespace PetCouple.Models
                 entity.Property(e => e.Url).IsRequired();
             });
 
+            modelBuilder.Entity<Tipo>(entity =>
+            {
+                entity.HasKey(e => e.IdTipo)
+                    .HasName("PK__Tipo__0641639266400D82");
+
+                entity.Property(e => e.IdTipo).HasColumnName("Id_Tipo");
+
+                entity.Property(e => e.NombreTipo)
+                    .IsRequired()
+                    .HasMaxLength(30);
+            });
+
             modelBuilder.Entity<Usuarios>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuarios__63C76BE274D13281");
+                    .HasName("PK__Usuarios__63C76BE209F22CC1");
 
                 entity.Property(e => e.IdUsuario).HasColumnName("Id_Usuario");
 
@@ -119,6 +132,8 @@ namespace PetCouple.Models
                     .IsRequired()
                     .HasMaxLength(10);
 
+                entity.Property(e => e.IdTipo).HasColumnName("Id_Tipo");
+
                 entity.Property(e => e.Identficador).IsRequired();
 
                 entity.Property(e => e.NombreCompleto)
@@ -133,10 +148,6 @@ namespace PetCouple.Models
                     .IsRequired()
                     .HasMaxLength(10);
 
-                entity.Property(e => e.Raza)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
                 entity.Property(e => e.Sexo)
                     .IsRequired()
                     .HasMaxLength(10);
@@ -144,6 +155,12 @@ namespace PetCouple.Models
                 entity.Property(e => e.Usuario)
                     .IsRequired()
                     .HasMaxLength(20);
+
+                entity.HasOne(d => d.IdTipoNavigation)
+                    .WithMany(p => p.Usuarios)
+                    .HasForeignKey(d => d.IdTipo)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Tipo");
             });
 
             OnModelCreatingPartial(modelBuilder);
