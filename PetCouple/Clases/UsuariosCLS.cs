@@ -208,16 +208,16 @@ namespace PetCouple.Clases
         public List<MatchCLS> ListUsuariosMatch() {
             using (PetCoupleContext db = new PetCoupleContext()) {
                 List<MatchCLS> getListUser = new List<MatchCLS>();
-                var getMatch = db.Interaccion.Where(x => x.Usuario1 == Usuario).ToList();
+                var getMatch = db.Interaccion.Where(x => x.Usuario1 == Usuario || x.Usuario2 == Usuario).ToList();
                 
                 for (int i = 0; i <= getMatch.Count; i++)
                 {
                     try
                     {
-                        var getUsuario2 = db.Usuarios.Where(x => x.IdUsuario == getMatch[i].Usuario2).FirstOrDefault();
-                        if (getUsuario2 != null)
+                        var getUsuarios = db.Usuarios.Where(x => x.IdUsuario == getMatch[i].Usuario2 ).FirstOrDefault();
+                        if (getUsuarios != null)
                         {
-                            string nombre = getUsuario2.NombreCompleto;
+                            string nombre = getUsuarios.NombreCompleto;
                             string lugar = db.Parques.Where(x => x.IdParque == getMatch[i].IdParque).First().Lugar;
                             string url = db.Parques.Where(x => x.IdParque == getMatch[i].IdParque).First().Url;
 
