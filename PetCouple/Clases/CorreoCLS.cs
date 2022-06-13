@@ -13,7 +13,8 @@ namespace PetCouple.Clases
         private string asunto;
         private string mensaje;
         private string remitente_Email = "petcouplematch@gmail.com";
-        private string remitente_Pass = "PruebaMatch1.";
+        //private string remitente_Pass = "PruebaMatch1.";
+        private string remitente_Pass = "pnatfhdxtqnbbqpw";
 
         public string Contra { get => contra; set => contra = value; }
 
@@ -41,7 +42,7 @@ namespace PetCouple.Clases
             msg.To.Add(new MailAddress(destinatario));
             msg.Subject = asunto;
             msg.SubjectEncoding = Encoding.UTF8;
-            msg.Body = mensaje;
+            msg.Body = mensaje;            
             msg.BodyEncoding = Encoding.UTF8;
             msg.From = new MailAddress(remitente_Email);
             msg.IsBodyHtml = false;

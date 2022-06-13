@@ -29,7 +29,7 @@ namespace PetCouple.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=tcp:petcoupleserver.database.windows.net,1433;Initial Catalog=PetCouple;Persist Security Info=False;User ID=PetCoupleAdmi;Password=PetCouplecontraseña1.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer("Server=tcp:petcouple.database.windows.net,1433;Initial Catalog=PetCouple;Persist Security Info=False;User ID=administrador;Password=Adminadmin1.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
