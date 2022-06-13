@@ -36,7 +36,7 @@ namespace PetCouple.Clases
         {
             using (PetCoupleContext db = new PetCoupleContext()) {
 
-                var getUsuario = db.Usuarios.Where(x => x.Usuario == user.Usuario.ToUpper()).FirstOrDefault();
+                var getUsuario = db.Usuarios.Where(x => x.Usuario == user.Usuario.ToLower()).FirstOrDefault();
                 if (getUsuario!= null)
                 {
                     return "El nombre de usuario ya fue regiustrado prueba con otro";
